@@ -1,6 +1,6 @@
-import { Messages } from '@/components/Messages'
-import { StaticMessages } from '@/components/StaticMessages'
 import Image from 'next/image'
+import { StaticMessages } from '../components/StaticMessages'
+import { Messages } from '../components/Messages'
 
 export default function Home() {
   return (

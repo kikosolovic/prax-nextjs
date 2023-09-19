@@ -21,12 +21,7 @@
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -40,7 +35,7 @@
   "ts-node": {
     "compilerOptions": {
       "module": "Node16",
-      "moduleResolution": "Node16"
-    }
+      "moduleResolution": "Node16",
+    },
   },
 }
