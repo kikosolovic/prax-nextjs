@@ -32,3 +32,8 @@ Generate DB typescript definitions models for Kysely query builder
 ```bash
 npm run db:codegen:dev
 ```
+
+Seed database with test data
+```bash
+npm run db:seed:dev
+```
