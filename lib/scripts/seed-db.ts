@@ -24,6 +24,7 @@ async function seedDB() {
   const createdProducts = await db.selectFrom('products').select('id').execute()
 
   const reviews = []
+  const photos = []
 
   for (const createdProduct of createdProducts) {
     console.log(createdProduct.id)
@@ -38,10 +39,23 @@ async function seedDB() {
         username: faker.internet.userName(),
       })
     }
+
+    const nPhotos = faker.number.int({ min: 0, max: 6 })
+
+    for (let i = 0; i < nPhotos; i++) {
+      photos.push({
+        productId: createdProduct.id,
+        url: faker.image.urlLoremFlickr({ category: 'technics' }),
+      })
+    }
   }
 
   if (reviews.length > 0) {
     await db.insertInto('productsReviews').values(reviews).execute()
+  }
+
+  if (photos.length > 0) {
+    await db.insertInto('productsPhotos').values(photos).execute()
   }
 
   console.log('Done')
