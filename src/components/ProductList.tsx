@@ -2,14 +2,18 @@ import { createDB } from '../lib/db'
 import Link from 'next/link'
 import Image from 'next/image'
 
-async function getProducts() {
+async function getProducts(page: number) {
   const db = createDB()
+
+  const pageSize = 9
 
   const products = await db
     .selectFrom('products')
     .leftJoin('productsPhotos', 'products.id', 'productsPhotos.productId')
     .select(['products.id', 'products.name', 'products.price', 'productsPhotos.url'])
     .groupBy(['products.id'])
+    .limit(pageSize)
+    .offset((page - 1) * pageSize)
     .execute()
 
   return products
@@ -43,8 +47,15 @@ function Product(props: ProductProps) {
   )
 }
 
-export async function ProductList() {
-  const products = await getProducts()
+type ProductListProps = {
+  page: number
+}
+
+export async function ProductList(props: ProductListProps) {
+  const page = props.page
+  console.log(page)
+
+  const products = await getProducts(page)
 
   return (
     <div className="grid grid-cols-3 gap-4">
