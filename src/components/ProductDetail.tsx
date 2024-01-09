@@ -1,4 +1,5 @@
 import { createDB } from '../lib/db'
+import { CreateProductReviewForm } from './CreateProductReviewForm'
 
 async function getProductDetail(id: number) {
   const db = createDB()
@@ -39,13 +40,6 @@ export async function ProductDetail({ id }: ProductDetailProps) {
       <div>{product.description}</div>
       <div>{product.price}</div>
       <div>
-        {reviews.map((pr) => (
-          <div key={pr.id}>
-            {pr.username} - {pr.content}
-          </div>
-        ))}
-      </div>
-      <div>
         {photos.map((p) => (
           <div key={p.id}>
             <picture>
@@ -54,6 +48,14 @@ export async function ProductDetail({ id }: ProductDetailProps) {
           </div>
         ))}
       </div>
+      <div>
+        {reviews.map((pr) => (
+          <div key={pr.id}>
+            {pr.username} - [{pr.rating}] {pr.content}
+          </div>
+        ))}
+      </div>
+      <CreateProductReviewForm productId={product.id} />
     </div>
   )
 }
