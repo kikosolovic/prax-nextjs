@@ -43,6 +43,8 @@ function Product(props: ProductProps) {
         )}
       </div>
       <Link href={`/product/${props.id}`}>Details</Link>
+      <br />
+      <Link href={`/product-edit/${props.id}`}>Edit</Link>
     </div>
   )
 }

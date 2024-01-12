@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { createDB } from '../lib/db'
 import { CreateProductReviewForm } from './CreateProductReviewForm'
 
@@ -36,6 +37,7 @@ export async function ProductDetail({ id }: ProductDetailProps) {
 
   return (
     <div>
+      <Link href={`/product-edit/${id}`}>Edit</Link>
       <div>{product.name}</div>
       <div>{product.description}</div>
       <div>{product.price}</div>
