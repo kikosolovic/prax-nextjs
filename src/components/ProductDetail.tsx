@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { createDB } from '../lib/db'
 import { CreateProductReviewForm } from './CreateProductReviewForm'
+import { ProductReview } from './ProductReview'
 
 async function getProductDetail(id: number) {
   const db = createDB()
@@ -52,9 +53,7 @@ export async function ProductDetail({ id }: ProductDetailProps) {
       </div>
       <div>
         {reviews.map((pr) => (
-          <div key={pr.id}>
-            {pr.username} - [{pr.rating}] {pr.content}
-          </div>
+          <ProductReview key={pr.id} id={pr.id} rating={pr.rating} content={pr.content} username={pr.username} />
         ))}
       </div>
       <CreateProductReviewForm productId={product.id} />
