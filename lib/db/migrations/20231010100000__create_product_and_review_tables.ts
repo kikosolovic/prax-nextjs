@@ -7,7 +7,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
     name text not null,
     description text not null,
     price real not null
-  );
+  ) STRICT;
   `.execute(db)
 
   await sql`
@@ -17,7 +17,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
     rating integer not null,
     content text,
     foreign key (product_id) references products(id)
-  );
+  ) STRICT;
   `.execute(db)
 }
 
