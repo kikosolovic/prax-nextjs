@@ -2,11 +2,16 @@ import Link from 'next/link'
 import { createDB } from '../lib/db'
 import { CreateProductReviewForm } from './CreateProductReviewForm'
 import { ProductReview } from './ProductReview'
+import { AddToCartButton } from './AddToCartButton'
 
 async function getProductDetail(id: number) {
   const db = createDB()
 
-  const product = await db.selectFrom('products').selectAll().where('id', '=', id).executeTakeFirstOrThrow()
+  const product = await db
+    .selectFrom('products')
+    .selectAll()
+    .where('id', '=', id)
+    .executeTakeFirstOrThrow()
 
   return product
 }
@@ -14,7 +19,11 @@ async function getProductDetail(id: number) {
 async function getProductReviews(id: number) {
   const db = createDB()
 
-  const reviews = await db.selectFrom('productsReviews').selectAll().where('productId', '=', id).execute()
+  const reviews = await db
+    .selectFrom('productsReviews')
+    .selectAll()
+    .where('productId', '=', id)
+    .execute()
 
   return reviews
 }
@@ -22,7 +31,11 @@ async function getProductReviews(id: number) {
 async function getProductPhotos(id: number) {
   const db = createDB()
 
-  const photos = await db.selectFrom('productsPhotos').selectAll().where('productId', '=', id).execute()
+  const photos = await db
+    .selectFrom('productsPhotos')
+    .selectAll()
+    .where('productId', '=', id)
+    .execute()
 
   return photos
 }
@@ -42,6 +55,7 @@ export async function ProductDetail({ id }: ProductDetailProps) {
       <div>{product.name}</div>
       <div>{product.description}</div>
       <div>{product.price}</div>
+      <AddToCartButton id={id} />
       <div>
         {photos.map((p) => (
           <div key={p.id}>
@@ -53,7 +67,13 @@ export async function ProductDetail({ id }: ProductDetailProps) {
       </div>
       <div>
         {reviews.map((pr) => (
-          <ProductReview key={pr.id} id={pr.id} rating={pr.rating} content={pr.content} username={pr.username} />
+          <ProductReview
+            key={pr.id}
+            id={pr.id}
+            rating={pr.rating}
+            content={pr.content}
+            username={pr.username}
+          />
         ))}
       </div>
       <CreateProductReviewForm productId={product.id} />
