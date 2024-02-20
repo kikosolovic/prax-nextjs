@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form'
 import { deleteProductPhoto } from '../actions/delete-product-photo'
 import { createProductPhoto } from '../actions/create-product-photo'
+import { MyButton } from './ui/MyButton'
 
 type UpdateProductPhotosFormProps = {
   productId: number
@@ -39,14 +40,14 @@ export function UpdateProductPhotosForm(props: UpdateProductPhotosFormProps) {
         {props.photos.map((photo) => (
           <div className="m-3" key={photo.id}>
             <img src={photo.url} />
-            <button
+            <MyButton
               onClick={() => {
                 console.log('Clicked Delete:', photo.id)
                 deleteProductPhoto(photo.id)
               }}
             >
               Delete
-            </button>
+            </MyButton>
           </div>
         ))}
       </div>

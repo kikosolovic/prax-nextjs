@@ -2,6 +2,7 @@
 
 import { useForm } from 'react-hook-form'
 import { updateProduct } from '../actions/update-product'
+import { FormSubmitButton } from './ui/FormSubmitButton'
 
 type FormData = {
   name: string
@@ -39,7 +40,7 @@ export function UpdateProductForm(props: Props) {
       <input {...register('description')} />
       <label>Price</label>
       <input {...register('price')} />
-      <input type="submit" value="Update" />
+      <FormSubmitButton value="Update" />
     </form>
   )
 }

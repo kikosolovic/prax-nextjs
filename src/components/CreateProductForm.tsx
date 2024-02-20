@@ -2,6 +2,8 @@
 
 import { useForm } from 'react-hook-form'
 import { createProduct } from '../actions/create-product'
+import { FormSubmitButton } from './ui/FormSubmitButton'
+import { FormInput } from './ui/FormInput'
 
 type FormData = {
   name: string
@@ -23,12 +25,12 @@ export function CreateProductForm() {
   return (
     <form className="flex flex-col" onSubmit={onSubmit}>
       <label>Name</label>
-      <input {...register('name')} />
+      <FormInput inputProps={register('name')} />
       <label>Description</label>
-      <input {...register('description')} />
+      <FormInput inputProps={register('description')} />
       <label>Price</label>
-      <input {...register('price')} />
-      <input type="submit" value="Create" />
+      <FormInput inputProps={register('price')} />
+      <FormSubmitButton value="Create" />
     </form>
   )
 }

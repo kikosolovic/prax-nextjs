@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ProductReviewEditForm } from './ProductReviewEditForm'
+import { MyButton } from './ui/MyButton'
 
 type ProductReviewProps = {
   id: number
@@ -16,14 +17,14 @@ export function ProductReview(props: ProductReviewProps) {
   return (
     <div>
       {props.username} - [{props.rating}] {props.content} ---{' '}
-      <button
+      <MyButton
         onClick={() => {
           console.log('Clicked Edit:', props.id)
           setIsOpen(!isOpen)
         }}
       >
         {isOpen ? 'Cancel' : 'Edit'}
-      </button>
+      </MyButton>
       {isOpen ? (
         <ProductReviewEditForm
           id={props.id}
