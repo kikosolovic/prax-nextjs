@@ -11,8 +11,6 @@ export function ShoppingCartProvider({ children }: Props) {
   const [items, setItems] = useState<{ id: number; count: number }[]>([])
 
   const addItem = (itemId: number) => {
-    // console.log('Adding item id:', itemId)
-
     let itemExists = false
     for (const item of items) {
       if (item.id === itemId) {
@@ -29,7 +27,24 @@ export function ShoppingCartProvider({ children }: Props) {
     setItems([...items])
   }
 
-  // const removeItem
+  const removeItem = (itemId: number) => {
+    for (const item of items) {
+      if (item.id === itemId) {
+        item.count -= 1
+        break
+      }
+    }
 
-  return <ShoppingCartContext.Provider value={{ items, addItem }}>{children}</ShoppingCartContext.Provider>
+    setItems(items.filter((i) => i.count > 0))
+  }
+
+  const removeAllItems = (itemId: number) => {
+    setItems(items.filter((i) => i.id !== itemId))
+  }
+
+  return (
+    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, removeAllItems }}>
+      {children}
+    </ShoppingCartContext.Provider>
+  )
 }
