@@ -7,6 +7,7 @@ async function seedDB() {
   const db = createDB()
 
   await db.deleteFrom('productsReviews').execute()
+  await db.deleteFrom('productsPhotos').execute()
   await db.deleteFrom('products').execute()
 
   const products = []
