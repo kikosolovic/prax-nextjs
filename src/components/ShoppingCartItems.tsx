@@ -3,10 +3,11 @@
 import { useContext, useEffect, useState } from 'react'
 import { ShoppingCartContext } from './ShoppingCartContext'
 import { getProductsDetails } from '../actions/get-products-details'
+import { createOrder } from '../actions/create-order'
 
 export function ShoppingCartItems() {
   const [cart, setCart] = useState<{ id: number; count: number; name: string; price: number }[] | null>(null)
-  const { items, addItem, removeItem, removeAllItems } = useContext(ShoppingCartContext)
+  const { items, addItem, removeItem, removeAllItems, clear } = useContext(ShoppingCartContext)
 
   useEffect(() => {
     const itemIds = items.map((i) => i.id)
@@ -87,7 +88,20 @@ export function ShoppingCartItems() {
           ))}
         </tbody>
       </table>
-      Grand Total: {cart.reduce((acc, i) => acc + i.count * i.price, 0)}€
+      <div>Grand Total: {cart.reduce((acc, i) => acc + i.count * i.price, 0)}€</div>
+      <button
+        className="btn"
+        onClick={() => {
+          const totalCount = cart.reduce((acc, i) => acc + i.count, 0)
+          const totalPrice = cart.reduce((acc, i) => acc + i.count * i.price, 0)
+
+          createOrder({ totalCount, totalPrice }).then(() => {
+            clear()
+          })
+        }}
+      >
+        Order
+      </button>
     </div>
   )
 }

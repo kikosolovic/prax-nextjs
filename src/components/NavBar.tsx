@@ -11,6 +11,9 @@ export function NavBar() {
         <Link href="/shopping-cart">Shopping Cart</Link>
       </div>
       <ShoppingCartIndicator />
+      <div>
+        <Link href="/orders">Orders</Link>
+      </div>
     </div>
   )
 }

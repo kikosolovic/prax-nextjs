@@ -7,6 +7,7 @@ export type ShoppingCart = {
   addItem: (itemId: number) => void
   removeItem: (itemId: number) => void
   removeAllItems: (itemId: number) => void
+  clear: () => void
 }
 
 export const ShoppingCartContext = createContext<ShoppingCart>({
@@ -18,6 +19,9 @@ export const ShoppingCartContext = createContext<ShoppingCart>({
     throw new Error('Not implemented')
   },
   removeAllItems: (itemId: number) => {
+    throw new Error('Not implemented')
+  },
+  clear: () => {
     throw new Error('Not implemented')
   },
 })

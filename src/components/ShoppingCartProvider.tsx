@@ -42,8 +42,12 @@ export function ShoppingCartProvider({ children }: Props) {
     setItems(items.filter((i) => i.id !== itemId))
   }
 
+  const clear = () => {
+    setItems([])
+  }
+
   return (
-    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, removeAllItems }}>
+    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, removeAllItems, clear }}>
       {children}
     </ShoppingCartContext.Provider>
   )
